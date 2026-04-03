@@ -1,0 +1,51 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 `timescale 1ns/1ps\
+// Practical 2B - Half & Full Adder, Half & Full Subtractor\
+\
+module half_adder(input A,B, output Sum, Carry);\
+    assign Sum = A ^ B;\
+    assign Carry = A & B;\
+endmodule\
+\
+module full_adder(input A,B,Cin, output Sum,Carry);\
+    assign Sum = A ^ B ^ Cin;\
+    assign Carry = (A & B) | (B & Cin) | (A & Cin);\
+endmodule\
+\
+module half_subtractor(input A,B, output Diff,Borrow);\
+    assign Diff = A ^ B;\
+    assign Borrow = (~A) & B;\
+endmodule\
+\
+module full_subtractor(input A,B,Bin, output Diff,Borrow);\
+    assign Diff = A ^ B ^ Bin;\
+    assign Borrow = (~A & B) | (~(A ^ B) & Bin);\
+endmodule\
+\
+// ---------------- TESTBENCH ----------------\
+module tb_add_sub;\
+    reg A,B,Cin,Bin;\
+    wire Sum,Carry,Diff,Borrow;\
+\
+    half_adder ha(A,B,Sum,Carry);\
+    half_subtractor hs(A,B,Diff,Borrow);\
+    full_adder fa(A,B,Cin,Sum,Carry);\
+    full_subtractor fs(A,B,Bin,Diff,Borrow);\
+\
+    initial begin\
+        $monitor("Time=%0t | A=%b B=%b Cin=%b Bin=%b | Sum=%b Carry=%b Diff=%b Borrow=%b",\
+                 $time,A,B,Cin,Bin,Sum,Carry,Diff,Borrow);\
+        A=0;B=0;Cin=0;Bin=0; #10;\
+        A=0;B=1;Cin=1;Bin=1; #10;\
+        A=1;B=0;Cin=0;Bin=1; #10;\
+        A=1;B=1;Cin=1;Bin=0; #10;\
+        $finish;\
+    end\
+endmodule\
+}

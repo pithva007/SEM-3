@@ -1,0 +1,51 @@
+Lossy compression: Lossy compression shrinks a file by permanently removing certain elements, 
+                    particularly redundant elements.
+Lossless compression: Lossless compression can restore all elements of a file during decompression
+                     without sacrificing data and quality.
+
+Text encoding is also of two types: 
+
+1.  Fixed length encoding and 
+2.  Variable length encoding. 
+
+
+lossless compression and uses variable-length encoding with prefix rule.
+
+cannonical huffman coding --> code are generated with bit length 
+
+https://www.geeksforgeeks.org/text-file-compression-and-decompression-using-huffman-coding/
+
+
+meta data --> total char , total diff char , codebook ( char == lenght (sorted)) --> content
+
+read meta data --> total char , total diff char , codebook( lenght , char)
+
+
+
+
+
+
+
+
+
+
+// code for decodeing 
+    ifstream inFile1(output_file, ios::binary);
+    if (!inFile1.is_open())
+    {
+        cerr << "Error: Could not open the file : " << output_file << endl;
+        return 1;
+    }
+    int tch, t_dch;
+    inFile1.read(reinterpret_cast<char *>(&tch), sizeof(tch));
+    inFile1.read(reinterpret_cast<char *>(&t_dch), sizeof(t_dch));
+    cout << tch << " " << t_dch << endl;
+    for (int i = 0; i < t_dch; i++)
+    {
+        int f;
+        char c;
+        inFile1.read(reinterpret_cast<char *>(&f), sizeof(f));
+        inFile1.read(&c, sizeof(c));
+        cout << c << " " << f << endl;
+    }
+    inFile1.close();

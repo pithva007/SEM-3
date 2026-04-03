@@ -1,0 +1,41 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 `timescale 1ns/1ps\
+\
+\
+module universal_gates (\
+    input A, B,\
+    output AND_out, OR_out, NOT_A\
+);\
+    wire nand_ab, nand_aa, nand_bb;\
+    assign nand_ab = ~(A & B);\
+    assign nand_aa = ~(A & A);\
+    assign nand_bb = ~(B & B);\
+\
+    assign AND_out = ~(nand_ab);\
+    assign OR_out  = ~(nand_aa & nand_bb);\
+    assign NOT_A   = nand_aa;\
+endmodule\
+\
+module tb_universal_gates;\
+    reg A, B;\
+    wire AND_out, OR_out, NOT_A;\
+\
+    universal_gates dut(A, B, AND_out, OR_out, NOT_A);\
+\
+    initial begin\
+        $monitor("Time=%0t | A=%b B=%b | AND=%b OR=%b NOT_A=%b",\
+                  $time, A, B, AND_out, OR_out, NOT_A);\
+        A=0; B=0; #10;\
+        A=0; B=1; #10;\
+        A=1; B=0; #10;\
+        A=1; B=1; #10;\
+        $finish;\
+    end\
+endmodule\
+}

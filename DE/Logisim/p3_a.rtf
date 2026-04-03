@@ -1,0 +1,45 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 `timescale 1ns/1ps\
+// Practical 3A - BCD to 2421 Converter\
+\
+module bcd_to_2421 (\
+    input  [3:0] bcd,   // 4-bit BCD input (0\'969)\
+    output reg [3:0] code // 2421 output\
+);\
+    always @(*) begin\
+        case (bcd)\
+            4'd0: code = 4'b0000; // 0\
+            4'd1: code = 4'b0001; // 1\
+            4'd2: code = 4'b0010; // 2\
+            4'd3: code = 4'b0011; // 3\
+            4'd4: code = 4'b0100; // 4\
+            4'd5: code = 4'b1011; // 5 in 2421\
+            4'd6: code = 4'b1100; // 6\
+            4'd7: code = 4'b1101; // 7\
+            4'd8: code = 4'b1110; // 8\
+            4'd9: code = 4'b1111; // 9\
+            default: code = 4'bxxxx;\
+        endcase\
+    end\
+endmodule\
+\
+// ---------------- TESTBENCH ----------------\
+module tb_bcd_to_2421;\
+    reg [3:0] bcd;\
+    wire [3:0] code;\
+\
+    bcd_to_2421 dut(bcd, code);\
+\
+    initial begin\
+        $monitor("Time=%0t | BCD=%d -> 2421=%b", $time, bcd, code);\
+        for (bcd = 0; bcd < 10; bcd = bcd + 1) #10;\
+        $finish;\
+    end\
+endmodule\
+}
