@@ -17,24 +17,35 @@ SEM-3/
 │   ├── C2C/
 │   ├── DE Assignment/
 │   ├── MFCS Assigmnet/
+│   │   ├── final/
+│   │   └── main/
 │   └── Sudoku/
 ├── Community service/
 ├── DE/
 │   └── Logisim/
+│       └── DE PRACTICALS/
 ├── DS/
 │   └── DS_AllPractical/
+│       ├── BinaryTree/
+│       ├── Graph/
+│       ├── LL/
+│       │   └── practice/
+│       ├── Queue/
+│       ├── Stack/
+│       ├── Trees/
+│       └── sorting_searching/
 ├── DS-T/
-|  └── All the theory of DS
+│   └── All the theory of DS
 ├── Economics/
-|   ├── THEORY/
-|   └── TUT/
+│   ├── THEORY/
+│   └── TUT/
 ├── ICC/
-|  ├── THEORY/
+│   └── THEORY/
 ├── Maths/
 │   ├── THEORY/
 │   └── TUT/
 ├── Oops/
-│   ├── THEORY/
+│   └── THEORY/
 └── Oops-T/
-|  └── All Practical of Oops
+    └── All Practical of Oops
 ```               
